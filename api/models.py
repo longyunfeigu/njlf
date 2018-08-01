@@ -355,12 +355,17 @@ class Article(models.Model):
         return "%s-%s" % (self.source, self.title)
 
 class Collection(models.Model):
-    """收藏"""
+    """收藏或点赞"""
     content_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
     account = models.ForeignKey("Account")
+    agree_collection_choices = (
+        (0, '点赞'),
+        (1, '收藏')
+    )
+    action = models.PositiveSmallIntegerField(choices=agree_collection_choices, default=0)
     date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -397,3 +402,15 @@ class UserAuthToken(models.Model):
     user = models.OneToOneField(to="Account")
     token = models.CharField(max_length=64, unique=True)
 
+class Agree(models.Model):
+    """收藏"""
+    content_type = models.ForeignKey(ContentType)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
+
+    account = models.ForeignKey("Account")
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('content_type', 'object_id', 'account')
+        verbose_name_plural = '点赞表'

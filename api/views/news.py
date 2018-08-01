@@ -39,3 +39,8 @@ class NewsView(ViewSetMixin, APIView):
             ret.error = '未获取到资源'
             ret.code = 1001
         return Response(ret.__dict__)
+
+
+class AgreeView(APIView):
+    def post(self, request, *args, **kwargs):
+        aid = request.data.get('aid')
