@@ -120,3 +120,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+# 加了下面一句竟然会报错
+# from rest_framework.versioning import URLPathVersioning
+REST_FRAMEWORK = {
+    "DEFAULT_VERSIONING_CLASS": 'rest_framework.versioning.URLPathVersioning',
+    "DEFAULT_VERSION":'v1',
+    "ALLOWED_VERSIONS":['v1', 'v2'],
+
+    "DEFAULT_AUTHENTICATION_CLASSES":["api.utils.auth.MyAuthentication", ]
+}
