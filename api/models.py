@@ -395,6 +395,9 @@ class Account(models.Model):
     username = models.CharField("用户名", max_length=64, unique=True)
     password = models.CharField("密码", max_length=64)
 
+    def __str__(self):
+        return self.username
+
 class UserAuthToken(models.Model):
     """
     用户Token表

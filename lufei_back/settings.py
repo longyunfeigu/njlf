@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api.apps.CourseApiConfig',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -128,4 +129,17 @@ REST_FRAMEWORK = {
     "ALLOWED_VERSIONS":['v1', 'v2'],
 
     "DEFAULT_AUTHENTICATION_CLASSES":["api.utils.auth.MyAuthentication", ]
+}
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://10.20.1.18:6379",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "CONNECTION_POOL_KWARGS": {"max_connections": 100},
+            "PASSWORD": "123456",
+        }
+    }
 }

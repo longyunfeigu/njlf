@@ -10,5 +10,5 @@ class MyAuthentication(BaseAuthentication):
         token = request.query_params.get('token')
         obj = UserAuthToken.objects.filter(token=token).first()
         if obj:
-            return (obj.user.username, token)
+            return (obj.user, token)
         raise exceptions.AuthenticationFailed({'code': 1001, 'error': '认证失败','data':None})
