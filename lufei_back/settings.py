@@ -143,3 +143,6 @@ CACHES = {
         }
     }
 }
+
+
+SHOPPING_CAR_KEY = "shopping_car_%s_%s"
