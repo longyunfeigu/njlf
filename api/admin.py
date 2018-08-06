@@ -22,5 +22,6 @@ admin.site.register(Collection)  # 收藏
 admin.site.register(Comment)  # 通用的评论表
 admin.site.register(Account)  # 用户表
 admin.site.register(UserAuthToken)  # 用户Token表
-
+admin.site.register(Coupon)
+admin.site.register(CouponRecord)
 # Register your models here.

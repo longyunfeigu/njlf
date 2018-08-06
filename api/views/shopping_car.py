@@ -23,10 +23,12 @@ class ShoppingCarView(APIView):
         lis = []
         try:
             key_match = settings.SHOPPING_CAR_KEY%(request.user.id, '*')
-            for item in self.conn.keys(key_match, count=10):
+
+            for item in self.conn.scan_iter(key_match, count=10):
                 total += 1
                 redis_value = self.conn.hgetall(item)
                 lis.append(regular(redis_value))
+
             ret.data = {'total':total, 'myShopCart':lis}
         except Exception as e:
             ret.code = 1004
@@ -47,10 +49,6 @@ class ShoppingCarView(APIView):
 
             if policy_id not in policy:
                 raise PricePolicyInvalid('价格策略不合法')
-                # ret.code = 1001
-                # ret.error = '创建失败，该课程没有相应的价格策略'
-                # return Response(ret.__dict__)
-
             redis_value = {'title':course_obj.name,
                            'image':course_obj.course_img,
                            'policy':json.dumps(policy),

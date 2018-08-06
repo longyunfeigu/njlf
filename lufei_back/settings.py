@@ -146,3 +146,6 @@ CACHES = {
 
 
 SHOPPING_CAR_KEY = "shopping_car_%s_%s"
+PAYMENT_KEY = 'payment_%s_%s'
+PAYGLOBAL_KEY = 'payment_global_%s'
+
